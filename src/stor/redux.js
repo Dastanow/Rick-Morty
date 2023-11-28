@@ -5,5 +5,6 @@ const store = configureStore({
     reducer:{ 
     caracter: characterSlice
     }
-})
+}) 
+window.store = store 
 export default store

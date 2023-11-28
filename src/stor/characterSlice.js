@@ -22,6 +22,19 @@ export const getCharakter = createAsyncThunk(
         }
     }
 )
+export const getFilteredCharakter = createAsyncThunk( 
+    'charackter/getFilteredCharakter', 
+    async ({page, status, gender, name, species}, {dispatch}) => { 
+        try {
+            const data = await charcerApi.gerfiltercharac({page, status, gender, name, species}) 
+            console.log(data);
+            dispatch(setCharecter({character: data.results}))
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+)
 const characterSlise = createSlice({
     name: 'active',
     initialState: {

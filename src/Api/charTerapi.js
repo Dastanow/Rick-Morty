@@ -4,7 +4,6 @@ const charcerApi = {
   getAllCharacter() {
     return api.get(`character`).then((res) => res.data);
   },
-
   getcharacter({ id }) {
     return api.get(`character/${id}`).then((res) => res.data);
   },
@@ -12,7 +11,8 @@ const charcerApi = {
     return api.get(
       `character?${page !== 1 ? `page=${page}` : ""}${
         status !== "" ? `&status=${status}` : ""
-      } ${gender !== "" ? `&gender=${gender}` : ""} `
+      } ${gender !== "" ? `&gender=${gender}` : ""}
+      ${name !== "" ? `&name=${name}` : ""}  `
     );
   },
 };

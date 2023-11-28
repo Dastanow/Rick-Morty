@@ -1,17 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import charcerApi from './Api/charTerapi';
-import { useDispatch } from 'react-redux';
-import { getAllcharakters, getCharakter } from './stor/characterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllcharakters, getFilteredCharakter } from './stor/characterSlice';
+import Product from './Product';
 
 function App() {  
-  const dis = useDispatch()
-  useEffect(() => {  
-    console.log(charcerApi.gerfiltercharac());
- },[])
+  const dis = useDispatch()  
+  const  character  = useSelector((state) => state.caracter.character)
+  const [name, setName] = useState('')
+  const [gender, setGender] = useState('')
+  const [type, setType] = useState('') 
+  const [status, setStatus] = useState('') 
+  // console.log(character);
+  useEffect(() =>{  
+    dis(getFilteredCharakter({name, gender, type, status, page: 1,}))
+  },[dis])
   return (
     <div className="App">
-y
+      {/* {character?.map((item) => {
+        return <Product key={item.id} {...item}/>
+        })} */}
     </div>
   );
 }
