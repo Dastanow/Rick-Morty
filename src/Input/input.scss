@@ -1,0 +1,21 @@
+.input {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 40px;
+
+    input {
+        width: 200px;
+        height: 50px;
+        border-radius: 20px; 
+        text-align: center;
+        border: none;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;       }
+        select {
+            width: 200px;
+            height: 50px;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;              }
+}

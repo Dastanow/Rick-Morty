@@ -1,0 +1,17 @@
+.Home {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 29px;
+        grid-row-gap: 28px;
+        margin: 100px;
+      }
+      .rick{
+        display: flex;
+        justify-content: center;
+        img {
+          width: 365px;
+        }
+      }
+}

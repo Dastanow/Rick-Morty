@@ -5,7 +5,8 @@ export const getAllcharakters = createAsyncThunk(
     async (_, {dispatch}) => { 
         try {
             const data = await charcerApi.getAllCharacter() 
-            dispatch(setCharecter({character: data.results}))
+            dispatch(setCharecter(data.results))
+            console.log(data);
         } catch (error) {
             console.log(error);
         }
@@ -13,10 +14,10 @@ export const getAllcharakters = createAsyncThunk(
 )
 export const getCharakter = createAsyncThunk( 
     'charackter/getCharakter', 
-    async ({id}, {dispatch}) => { 
+    async (id, {dispatch}) => { 
         try {
             const data = await charcerApi.getcharacter({id}) 
-            dispatch(setCharecter({character: data.results}))
+            dispatch(setCharack(data.results))
         } catch (error) {
             console.log(error);
         }
@@ -24,13 +25,26 @@ export const getCharakter = createAsyncThunk(
 )
 export const getFilteredCharakter = createAsyncThunk( 
     'charackter/getFilteredCharakter', 
-    async ({page, status, gender, name, species}, {dispatch}) => { 
-        try {
-            const data = await charcerApi.gerfiltercharac({page, status, gender, name, species}) 
-            console.log(data);
-            dispatch(setCharecter({character: data.results}))
-            
+    async ({page, status, gender, name, species,}, {dispatch}) => { 
+        try { 
+                const data = await charcerApi.gerfiltercharac( {page, status, gender, name, species,  }) 
+                dispatch(setOllPage({ollPage: data.data.info.pages}))
+                dispatch(setCharecter(data))
         } catch (error) {
+            if(error.response.data.error){ 
+                dispatch(setCurrentPage({page:1}))
+            }
+        }
+    }
+)
+export const getcHaracter = createAsyncThunk(
+    'charackter/getcharacter',
+    async ({id}, {dispatch}) => {
+        try{
+            const data = await charcerApi.getcharacter({id})
+            console.log(data);
+            dispatch(setCharecter(data.results))
+        } catch(error) {
             console.log(error);
         }
     }
@@ -47,8 +61,8 @@ const characterSlise = createSlice({
         setCurrentPage(state, actions){ 
             state.curentPage = actions.payload.page
         },
-        setCharecter(state, actions){ 
-            state.character = actions.payload.character
+        setCharecter(state, action){ 
+            state.character = action.payload
         },
         setOllPage(state, actions){ 
             state.ollPage = actions.payload.ollPage
@@ -56,8 +70,14 @@ const characterSlise = createSlice({
         setDefin(state, actions){ 
             state.defineCharackter = actions.payload.defint
         },
+        setCharack(state, action){ 
+           return {
+             ...state,
+             character: [...action.payload]
+        }
+        },
     }
 
 })
-export const {setCurrentPage,setCharecter,setOllPage} = characterSlise.actions
+export const {setCurrentPage,setCharecter,setOllPage, setCharack} = characterSlise.actions
 export default characterSlise.reducer

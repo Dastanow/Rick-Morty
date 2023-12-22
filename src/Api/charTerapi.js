@@ -7,12 +7,14 @@ const charcerApi = {
   getcharacter({ id }) {
     return api.get(`character/${id}`).then((res) => res.data);
   },
-  gerfiltercharac({ page = 1, status = "", gender = "", name, species }) {
+  gerfiltercharac({ page = 1, status = "", gender = "", name, species = 1 }) {
     return api.get(
       `character?${page !== 1 ? `page=${page}` : ""}${
         status !== "" ? `&status=${status}` : ""
       } ${gender !== "" ? `&gender=${gender}` : ""}
-      ${name !== "" ? `&name=${name}` : ""}  `
+      ${name !== "" ? `&name=${name}` : ""} ${
+        species !== "" ? `&species=${species}` : ""
+      }`
     );
   },
 };
